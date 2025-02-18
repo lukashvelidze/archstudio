@@ -14,7 +14,7 @@
     gap: 32px;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(rgba(41, 37, 37, 0.4), rgba(34, 28, 28, 0.4)), url(./images/banner.jpg);
+    background-image: linear-gradient(rgba(41, 37, 37, 0.4), rgba(34, 28, 28, 0.4)), url(/images/banner.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
