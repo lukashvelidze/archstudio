@@ -1,0 +1,60 @@
+.productMainDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    height: 100vh;
+}
+
+
+.routesDiv {
+    padding-inline: 200px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.routes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ac7474;
+    opacity: 0.9;
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    height: 200px;
+    width: 250px;
+}
+
+
+.routes:hover {
+    background-color: #b62323;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.routes:active {
+    transform: translateY(0px);
+    box-shadow: none;
+}
+
+
+
+@media (max-width: 600px) {
+    .routesDiv {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .routes {
+        width: 100%;
+    }
+}
