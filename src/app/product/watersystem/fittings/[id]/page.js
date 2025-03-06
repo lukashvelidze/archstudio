@@ -1,9 +1,10 @@
 'use client'
 import { fittingsJSON } from '@/app/constants/fittingsJSON'
 import { useParams } from 'next/navigation';
-import Image from 'next/image';  // Import Image component
+import Image from 'next/image';  
 import './fittingsSub.css'
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link';
 
 export default function FittingsSub() {
     const { id } = useParams();
@@ -11,10 +12,9 @@ export default function FittingsSub() {
     const [price, setPrice] = useState("");
     const [dimensions, setDimensions] = useState("");
 
-    // Find the specific product based on the id
     const product = fittingsJSON.find((product) => product.id === id);
 
-    // Set initial price and size when the component mounts
+   
     useEffect(() => {
         if (product) {
             const smallestSize = product.sizes[0];
@@ -24,12 +24,11 @@ export default function FittingsSub() {
         }
     }, [product]);
 
-    // Update price when size is changed
     const handleSizeChange = (e) => {
         const selectedSize = e.target.value;
         setSelectedSize(selectedSize);
         
-        // Find the selected size details
+       
         const sizeDetails = product.sizes.find(size => size.size === selectedSize);
         if (sizeDetails) {
             setPrice(sizeDetails.price);
@@ -39,7 +38,7 @@ export default function FittingsSub() {
 
     return (
         <div className='fittingsSub_div'>
-            {/* Product Image using next/image */}
+        
             <div className="productImageDiv">
                 <Image 
                     src={product.image} 
@@ -47,16 +46,16 @@ export default function FittingsSub() {
                     className="productImage" 
                     width={500} 
                     height={500} 
-                    objectFit="cover"  
+                    style={{objectFit:'cover'}}
                 />
             </div>
 
-            {/* Product Details */}
+           
             <div className="productDetails">
                 <h1 className="productTitle">{product.name.replace(/-/g, " ")}</h1>
                 <p className="productDescription">{product.description}</p>
 
-                {/* Size Selector */}
+                
                 <div className="sizeSelector">
                     <label htmlFor="sizes"><strong>Size:</strong></label>
                     <select
@@ -70,9 +69,10 @@ export default function FittingsSub() {
                     </select>
                 </div>
 
-                {/* Price */}
+                
                 <p className="productPrice"><strong>Price:</strong> {price}</p>
             </div>
+            <Link href={'/product/watersystem/fittings'} rel='preload' >Back</Link>
         </div>
     )
 }

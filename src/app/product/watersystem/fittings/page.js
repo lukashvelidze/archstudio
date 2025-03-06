@@ -1,6 +1,7 @@
 
 import { fittingsJSON } from '@/app/constants/fittingsJSON'
 import Link from 'next/link'
+import '../watersystem.css'
 import React from 'react'
 
 export default function Fittings() {

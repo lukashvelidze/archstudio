@@ -1,4 +1,4 @@
-/* Reset and global styling */
+
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +11,6 @@ body {
     color: #333;
 }
 
-/* Main container for the product page */
 .fittingsSub_div {
     margin-top: 100px;
     display: flex;
@@ -23,7 +22,6 @@ body {
     background-color: #f4f4f4;
 }
 
-/* Product image container */
 .productImageDiv {
     flex: 1;
     max-width: 400px;
@@ -37,7 +35,6 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Product details container */
 .productDetails {
     flex: 2;
     max-width: 600px;
@@ -50,22 +47,19 @@ body {
     gap: 20px;
 }
 
-/* Product title styling */
 .productTitle {
     font-size: 36px;
     font-weight: bold;
-    color: #d9534f; /* Fire red */
+    color: #d9534f; 
     text-transform: capitalize;
 }
 
-/* Product description styling */
 .productDescription {
     font-size: 18px;
     color: #555;
     line-height: 1.6;
 }
 
-/* Product category and price styling */
 .productCategory,
 .productPrice {
     font-size: 18px;
@@ -73,7 +67,6 @@ body {
     color: #333;
 }
 
-/* Size selector styling */
 .sizeSelector {
     font-size: 18px;
     margin-bottom: 20px;
@@ -87,18 +80,17 @@ body {
     border-radius: 5px;
 }
 
-/* Add a subtle hover effect on price */
 .productPrice {
-    color: #ff7f50; /* Fire orange */
+    color: #ff7f50; 
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
 .productPrice:hover {
-    color: #d9534f; /* Fire red on hover */
+    color: #d9534f; 
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
     .fittingsSub_div {
         flex-direction: column;

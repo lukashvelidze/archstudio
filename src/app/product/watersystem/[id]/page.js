@@ -17,7 +17,7 @@ export default function WaterSystemProduct() {
     }
 
     if (product.id === 'fittings') {
-        return <div><Fittings /></div>
+        return <Fittings />
     }
 
     return (
