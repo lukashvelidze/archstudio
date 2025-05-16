@@ -13,20 +13,21 @@ export default async function ProductPage() {
   const categories = await res.json();
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
         პროდუქციის კატეგორიები
       </h1>
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      {/* Horizontal scrolling container */}
+      <div className="flex gap-6 overflow-x-auto pb-4">
         {categories.map((cat) => (
           <div
             key={cat.id}
-            className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-200 p-6 flex flex-col justify-between"
+            className="min-w-[250px] bg-red-600 text-white rounded-lg shadow-md hover:shadow-xl hover:bg-red-700 transition-all duration-200 p-6 flex flex-col justify-between"
           >
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">{cat.name}</h2>
+            <h2 className="text-xl font-semibold mb-4 text-center">{cat.name}</h2>
             <Link href={`/product/category/${cat.id}`}>
-              <button className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+              <button className="mt-auto bg-white text-red-600 hover:bg-gray-100 font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
                 ნახვა
               </button>
             </Link>
