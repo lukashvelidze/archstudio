@@ -18,12 +18,12 @@ export default async function ProductPage() {
         <h1 className="text-4xl font-extrabold text-white drop-shadow-md mb-12">
           პროდუქციის კატეგორიები
         </h1>
+
         <div className="list_div">
           {categories.map((cat) => (
             <Link key={cat.id} href={`/product/category/${cat.id}`}>
               <div className="list_product">{cat.name}</div>
             </Link>
-
           ))}
         </div>
       </div>
