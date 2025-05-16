@@ -17,8 +17,12 @@ export default function Product() {
         <Link href={routes.watersystem} rel="preload" >
           <div className="routes">წყლის სისტემა</div>
         </Link>
-        <Link href={routes.evacuation} rel="preload" > <div className="routes" > ადამიანთა ევაკუაციის მართვის სისტემა </div> </Link>
-        <Link href={routes.broadcasting} rel="preload" > <div className="routes" > ტექსტური მაუწყებლობა </div> </Link>
+        <Link href={routes.evacuation} rel="preload" >
+          <div className="routes" > ადამიანთა ევაკუაციის მართვის სისტემა </div>
+        </Link>
+        <Link href={routes.broadcasting} rel="preload" >
+          <div className="routes" > ტექსტური მაუწყებლობა </div>
+        </Link>
 
       </div>
     </div>

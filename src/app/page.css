@@ -4,6 +4,7 @@
 }
 
 .insideDiv {
+    margin-top: 100px;
     display: flex;
     gap: 32px;
 }
@@ -18,7 +19,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 100vh;
+    height: 400px;
 }
 
 .homePageButton,
@@ -65,6 +66,26 @@
     transition: 0.5s ease-out;
     background-color: #ac7474;
     scale: 1.03;
+}
+
+.serviceDiv,
+.projects {
+    margin: 64px 32px;
+}
+
+.serviceDiv_title,
+.projects_title {
+
+    font-size: 24px;
+    font-weight: bold;
+
+}
+
+.serviceDiv_text {
+
+    margin-top: 64px;
+    font-size: 18px;
+    line-height: 0.7cm;
 }
 
 @keyframes slideInFromLeft {

@@ -14,7 +14,7 @@ export default function Header() {
             </Link>
             <div className='phoneDiv'>
                 <a href='tel:+995 598 11 15 07'><Image width={20} height={20} src='/images/phone.svg' alt='phone icon' /></a>
-                <a href='tel:+995 598 11 15 07'> +995 598 11 15 07</a>
+                <a href='tel:+995 598 11 15 07' style={{color:'black'}} > +995 598 11 15 07</a>
             </div>
             <Navigation />
         </div>
