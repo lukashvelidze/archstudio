@@ -1,30 +1,38 @@
-import Link from "next/link"
-import './productPage.css'
-import { routes } from "../constants/routes"
+import Link from "next/link";
 
+export default async function ProductPage() {
+  const res = await fetch('http://localhost:3000/api/categories', {
+    cache: 'no-store',
+  });
 
-export default function Product() {
+  if (!res.ok) {
+    console.error("Failed to fetch categories");
+    return <div>კატეგორიების ჩატვირთვა ვერ მოხერხდა</div>;
+  }
+
+  const categories = await res.json();
+
   return (
-    <div className="productMainDiv">
-      {/* <h1 className="productTitle" >პროდუქცია</h1> */}
-      <div className="routesDiv">
-        <Link href={routes.detectors} rel="preload" >
-          <div className="routes detimg" > დეტექცია </div>
-        </Link>
-        <Link href={routes.smokesystem} rel="preload" >
-          <div className="routes"> კვამლის საწინააღმდეგო ვენტილაცია </div>
-        </Link>
-        <Link href={routes.watersystem} rel="preload" >
-          <div className="routes">წყლის სისტემა</div>
-        </Link>
-        <Link href={routes.evacuation} rel="preload" >
-          <div className="routes" > ადამიანთა ევაკუაციის მართვის სისტემა </div>
-        </Link>
-        <Link href={routes.broadcasting} rel="preload" >
-          <div className="routes" > ტექსტური მაუწყებლობა </div>
-        </Link>
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
+        პროდუქციის კატეგორიები
+      </h1>
 
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        {categories.map((cat) => (
+          <div
+            key={cat.id}
+            className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-200 p-6 flex flex-col justify-between"
+          >
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">{cat.name}</h2>
+            <Link href={`/product/category/${cat.id}`}>
+              <button className="mt-auto bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200">
+                ნახვა
+              </button>
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
-  )
+  );
 }
