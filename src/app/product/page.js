@@ -1,9 +1,9 @@
 import Link from "next/link";
-import "./productPage.css"; // ✅ make sure this is imported
+import "./productPage.css";
 
 export default async function ProductPage() {
-  const res = await fetch('http://localhost:3000/api/categories', {
-    cache: 'no-store',
+  const res = await fetch("http://localhost:3000/api/categories", {
+    cache: "no-store",
   });
 
   if (!res.ok) {
@@ -13,19 +13,17 @@ export default async function ProductPage() {
   const categories = await res.json();
 
   return (
-    <div className="productMainDiv">
+    <div className="main_div">
       <div>
-        <h1 className="text-4xl font-extrabold text-center text-red-700 mb-12 drop-shadow-md">
+        <h1 className="text-4xl font-extrabold text-white drop-shadow-md mb-12">
           პროდუქციის კატეგორიები
         </h1>
-
-        <div className="routesDiv">
+        <div className="list_div">
           {categories.map((cat) => (
             <Link key={cat.id} href={`/product/category/${cat.id}`}>
-              <div className="routes">
-                {cat.name}
-              </div>
+              <div className="list_product">{cat.name}</div>
             </Link>
+
           ))}
         </div>
       </div>
