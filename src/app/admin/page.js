@@ -130,6 +130,28 @@ export default function AdminPage() {
       </section>
 
       <section className="dashboard-section">
+        <h2 className="section-title">Category Reference</h2>
+        <div className="category-table-wrapper">
+          <table className="category-table">
+            <thead>
+              <tr>
+                <th>Category ID</th>
+                <th>Category Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(tables.Categories || []).map((cat) => (
+                <tr key={cat.id}>
+                  <td>{cat.id}</td>
+                  <td>{cat.name}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="dashboard-section">
         <h2 className="section-title">Products by Category</h2>
         {Object.entries(grouped).map(([categoryId, items]) => (
           <div key={categoryId} className="admin-table-card">

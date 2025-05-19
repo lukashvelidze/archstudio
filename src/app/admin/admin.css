@@ -211,3 +211,37 @@ button {
 button:hover {
   background-color: #e2e8f0;
 }
+
+.category-table-wrapper {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-light);
+  overflow-x: auto;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.category-table th,
+.category-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.category-table thead {
+  background-color: #f1f5f9;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.category-table tr:last-child td {
+  border-bottom: none;
+}
