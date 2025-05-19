@@ -99,80 +99,95 @@ export default function AdminPage() {
   });
 
   return (
-    <div className="admin-wrapper">
-      <h1 className="admin-title">Admin Product Management</h1>
+  <div className="dashboard-container">
+    <aside className="dashboard-sidebar">
+      <h2 className="sidebar-title">Admin Panel</h2>
+      <ul className="sidebar-links">
+        <li>Products</li>
+        {/* Add more links later */}
+      </ul>
+    </aside>
 
-      <form onSubmit={handleSubmit} className="admin-form">
-        <h2 className="form-title">Add New Product</h2>
-        <input name="product_name" placeholder="Name" value={formData.product_name} onChange={handleInput} className="inputStyle" required />
-        <input name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" />
-        <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleInput} className="inputStyle" />
-        <input name="dimension_data" placeholder="Dimensions" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
-        <select name="stock_status" value={formData.stock_status} onChange={handleInput} className="inputStyle">
-          <option>In Stock</option>
-          <option>Out of Stock</option>
-        </select>
-        <input name="category_id" type="number" placeholder="Category ID" value={formData.category_id} onChange={handleInput} className="inputStyle" />
-        <button type="submit" className="submitButton">Add Product</button>
-      </form>
+    <main className="dashboard-main">
+      <header className="dashboard-header">
+        <h1 className="admin-title">Product Dashboard</h1>
+      </header>
 
-      {Object.entries(grouped).map(([categoryId, items]) => (
-        <div key={categoryId} className="admin-table-wrapper mt-12">
-          <h2 className="text-xl font-bold mb-4">
-            {categoryMap[categoryId] || `Category ID: ${categoryId}`}
-          </h2>
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Dimensions</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((product) =>
-                editingProductId === product.id ? (
-                  <tr key={product.id}>
-                    <td>{product.id}</td>
-                    <td><input value={editData.product_name} onChange={(e) => setEditData({ ...editData, product_name: e.target.value })} /></td>
-                    <td><input value={editData.price} onChange={(e) => setEditData({ ...editData, price: e.target.value })} /></td>
-                    <td>
-                      <select value={editData.stock_status} onChange={(e) => setEditData({ ...editData, stock_status: e.target.value })}>
-                        <option>In Stock</option>
-                        <option>Out of Stock</option>
-                      </select>
-                    </td>
-                    <td><input value={editData.dimension_data} onChange={(e) => setEditData({ ...editData, dimension_data: e.target.value })} /></td>
-                    <td>
-                      <button onClick={saveEdit}>Save</button>
-                      <button onClick={cancelEdit}>Cancel</button>
-                    </td>
-                  </tr>
-                ) : (
-                  <tr key={product.id}>
-                    <td>{product.id}</td>
-                    <td>{product.product_name}</td>
-                    <td>{product.price}₾</td>
-                    <td>
-                      <span className={`stock-label ${product.stock_status === 'In Stock' ? 'in-stock' : 'out-of-stock'}`}>
-                        {product.stock_status}
-                      </span>
-                    </td>
-                    <td>{product.dimension_data}</td>
-                    <td>
-                      <button onClick={() => startEdit(product)}>Edit</button>
-                      <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                    </td>
-                  </tr>
-                )
-              )}
-            </tbody>
-          </table>
-        </div>
-      ))}
-    </div>
-  );
+      <section className="dashboard-section">
+        <h2 className="section-title">Add New Product</h2>
+        <form onSubmit={handleSubmit} className="admin-form">
+          <input name="product_name" placeholder="Name" value={formData.product_name} onChange={handleInput} className="inputStyle" required />
+          <input name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" />
+          <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleInput} className="inputStyle" />
+          <input name="dimension_data" placeholder="Dimensions" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
+          <select name="stock_status" value={formData.stock_status} onChange={handleInput} className="inputStyle">
+            <option>In Stock</option>
+            <option>Out of Stock</option>
+          </select>
+          <input name="category_id" type="number" placeholder="Category ID" value={formData.category_id} onChange={handleInput} className="inputStyle" />
+          <button type="submit" className="submitButton">Add Product</button>
+        </form>
+      </section>
+
+      <section className="dashboard-section">
+        <h2 className="section-title">Products by Category</h2>
+        {Object.entries(grouped).map(([categoryId, items]) => (
+          <div key={categoryId} className="admin-table-card">
+            <h3 className="table-title">{categoryMap[categoryId] || `Category ID: ${categoryId}`}</h3>
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Dimensions</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {items.map((product) =>
+                  editingProductId === product.id ? (
+                    <tr key={product.id}>
+                      <td>{product.id}</td>
+                      <td><input value={editData.product_name} onChange={(e) => setEditData({ ...editData, product_name: e.target.value })} /></td>
+                      <td><input value={editData.price} onChange={(e) => setEditData({ ...editData, price: e.target.value })} /></td>
+                      <td>
+                        <select value={editData.stock_status} onChange={(e) => setEditData({ ...editData, stock_status: e.target.value })}>
+                          <option>In Stock</option>
+                          <option>Out of Stock</option>
+                        </select>
+                      </td>
+                      <td><input value={editData.dimension_data} onChange={(e) => setEditData({ ...editData, dimension_data: e.target.value })} /></td>
+                      <td>
+                        <button onClick={saveEdit}>Save</button>
+                        <button onClick={cancelEdit}>Cancel</button>
+                      </td>
+                    </tr>
+                  ) : (
+                    <tr key={product.id}>
+                      <td>{product.id}</td>
+                      <td>{product.product_name}</td>
+                      <td>{product.price}₾</td>
+                      <td>
+                        <span className={`stock-label ${product.stock_status === 'In Stock' ? 'in-stock' : 'out-of-stock'}`}>
+                          {product.stock_status}
+                        </span>
+                      </td>
+                      <td>{product.dimension_data}</td>
+                      <td>
+                        <button onClick={() => startEdit(product)}>Edit</button>
+                        <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                      </td>
+                    </tr>
+                  )
+                )}
+              </tbody>
+            </table>
+          </div>
+        ))}
+      </section>
+    </main>
+  </div>
+);
 }
