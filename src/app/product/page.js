@@ -1,3 +1,4 @@
+// /app/product/page.js
 import Link from "next/link";
 import "./productPage.css";
 
@@ -13,16 +14,16 @@ export default async function ProductPage() {
   const categories = await res.json();
 
   return (
-    <div className="main_div">
+    <div className="category_bg">
       <div>
         <h1 className="text-4xl font-extrabold text-white drop-shadow-md mb-12">
           პროდუქციის კატეგორიები
         </h1>
 
-        <div className="list_div">
+        <div className="category_div">
           {categories.map((cat) => (
             <Link key={cat.id} href={`/product/category/${cat.id}`}>
-              <div className="list_product">{cat.name}</div>
+              <div className="category_card">{cat.name}</div>
             </Link>
           ))}
         </div>

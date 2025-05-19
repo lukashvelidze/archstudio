@@ -1,20 +1,19 @@
-/* productPage.css */
+/* ====== MAIN PRODUCT CATEGORY PAGE (RED CARDS) ====== */
 
-.main_div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  text-align: center;
+.category_bg {
   background-image: url(/images/bn.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.list_div {
-  margin-top: 100px;
+.category_div {
   padding-inline: 200px;
   display: flex;
   justify-content: center;
@@ -22,7 +21,7 @@
   flex-wrap: wrap;
 }
 
-.list_product {
+.category_card {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,20 +39,89 @@
   width: 200px;
 }
 
-.list_product:hover {
+.category_card:hover {
   background-color: #b62323;
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 600px) {
-  .list_div {
+  .category_div {
     flex-direction: column;
     gap: 10px;
     padding-inline: 20px;
   }
 
-  .list_product {
+  .category_card {
     width: 100%;
   }
+}
+
+
+/* ====== PRODUCT LISTING PAGE (WHITE STORE CARDS) ====== */
+
+.main_div {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.content_wrapper {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.page_title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+  color: #222;
+  text-align: center;
+}
+
+.list_div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  justify-items: center;
+}
+
+.product_card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  color: #222;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  gap: 10px;
+  text-align: left;
+}
+
+.product_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product_card .price {
+  color: #d62828;
+  font-weight: bold;
+}
+
+.product_card .stock {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.product_card .in-stock {
+  color: green;
+}
+
+.product_card .out-of-stock {
+  color: red;
 }
