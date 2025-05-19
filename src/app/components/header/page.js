@@ -8,7 +8,7 @@ import Navigation from '../navigation/Navigation'
 
 export default function Header() {
     return (
-        <div className='headerDiv'>
+        <div className='header'>
             <Link href={routes.home}>
                 <Image width={70} height={70} src='/images/Logo.png' alt='Archstudio Logo' priority={true} className='headerLogo' />
             </Link>
