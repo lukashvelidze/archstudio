@@ -16,7 +16,7 @@ export default async function ProductPage() {
   return (
     <div className="category_bg">
       <div>
-        <h1 className="text-4xl font-extrabold text-white drop-shadow-md mb-12">
+        <h1 className="category_title">
           პროდუქციის კატეგორიები
         </h1>
 

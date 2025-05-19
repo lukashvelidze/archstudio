@@ -125,3 +125,13 @@
 .product_card .out-of-stock {
   color: red;
 }
+
+.category_title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 40px;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
