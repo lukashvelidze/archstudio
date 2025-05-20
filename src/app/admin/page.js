@@ -13,16 +13,14 @@ export default function AdminPage() {
     dimension_data: "",
     stock_status: "In Stock",
     category_id: 1,
+    photo_url: "",
   });
 
   const [editingProductId, setEditingProductId] = useState(null);
   const [editData, setEditData] = useState({});
 
   useEffect(() => {
-    fetch("/api/products/get-all")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-
+    refreshProducts();
     fetch("/api/admin/db-tables")
       .then((res) => res.json())
       .then((data) => setTables(data));
@@ -47,6 +45,7 @@ export default function AdminPage() {
       dimension_data: "",
       stock_status: "In Stock",
       category_id: 1,
+      photo_url: "",
     });
   };
 
@@ -99,117 +98,99 @@ export default function AdminPage() {
   });
 
   return (
-  <div className="dashboard-container">
-    <aside className="dashboard-sidebar">
-      <h2 className="sidebar-title">Admin Panel</h2>
-      <ul className="sidebar-links">
-        <li>Products</li>
-        {/* Add more links later */}
-      </ul>
-    </aside>
+    <div className="dashboard-container">
+      <main className="dashboard-main">
+        <h1 className="admin-title">Admin Product Dashboard</h1>
 
-    <main className="dashboard-main">
-      <header className="dashboard-header">
-        <h1 className="admin-title">Product Dashboard</h1>
-      </header>
-
-      <section className="dashboard-section">
-        <h2 className="section-title">Add New Product</h2>
-        <form onSubmit={handleSubmit} className="admin-form">
-          <input name="product_name" placeholder="Name" value={formData.product_name} onChange={handleInput} className="inputStyle" required />
-          <input name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" />
-          <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleInput} className="inputStyle" />
-          <input name="dimension_data" placeholder="Dimensions" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
-          <select name="stock_status" value={formData.stock_status} onChange={handleInput} className="inputStyle">
-            <option>In Stock</option>
-            <option>Out of Stock</option>
-          </select>
-          <input name="category_id" type="number" placeholder="Category ID" value={formData.category_id} onChange={handleInput} className="inputStyle" />
-          <button type="submit" className="submitButton">Add Product</button>
-        </form>
-      </section>
-
-      <section className="dashboard-section">
-        <h2 className="section-title">Category Reference</h2>
-        <div className="category-table-wrapper">
-          <table className="category-table">
-            <thead>
-              <tr>
-                <th>Category ID</th>
-                <th>Category Name</th>
-              </tr>
-            </thead>
-            <tbody>
+        <section className="dashboard-section">
+          <h2 className="section-title">Add New Product</h2>
+          <form onSubmit={handleSubmit} className="admin-form">
+            <input name="product_name" placeholder="Name" value={formData.product_name} onChange={handleInput} className="inputStyle" required />
+            <input name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" />
+            <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleInput} className="inputStyle" />
+            <input name="dimension_data" placeholder="Dimensions" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
+            <input name="photo_url" placeholder="Photo URL" value={formData.photo_url} onChange={handleInput} className="inputStyle" />
+            <select name="stock_status" value={formData.stock_status} onChange={handleInput} className="inputStyle">
+              <option>In Stock</option>
+              <option>Out of Stock</option>
+            </select>
+            <select name="category_id" value={formData.category_id} onChange={handleInput} className="inputStyle">
               {(tables.Categories || []).map((cat) => (
-                <tr key={cat.id}>
-                  <td>{cat.id}</td>
-                  <td>{cat.name}</td>
-                </tr>
+                <option key={cat.id} value={cat.id}>{cat.name} (ID: {cat.id})</option>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
+            </select>
+            <button type="submit" className="submitButton">Add Product</button>
+          </form>
+        </section>
 
-      <section className="dashboard-section">
-        <h2 className="section-title">Products by Category</h2>
-        {Object.entries(grouped).map(([categoryId, items]) => (
-          <div key={categoryId} className="admin-table-card">
-            <h3 className="table-title">{categoryMap[categoryId] || `Category ID: ${categoryId}`}</h3>
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Stock</th>
-                  <th>Dimensions</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map((product) =>
-                  editingProductId === product.id ? (
-                    <tr key={product.id}>
-                      <td>{product.id}</td>
-                      <td><input value={editData.product_name} onChange={(e) => setEditData({ ...editData, product_name: e.target.value })} /></td>
-                      <td><input value={editData.price} onChange={(e) => setEditData({ ...editData, price: e.target.value })} /></td>
-                      <td>
-                        <select value={editData.stock_status} onChange={(e) => setEditData({ ...editData, stock_status: e.target.value })}>
-                          <option>In Stock</option>
-                          <option>Out of Stock</option>
-                        </select>
-                      </td>
-                      <td><input value={editData.dimension_data} onChange={(e) => setEditData({ ...editData, dimension_data: e.target.value })} /></td>
-                      <td>
-                        <button onClick={saveEdit}>Save</button>
-                        <button onClick={cancelEdit}>Cancel</button>
-                      </td>
-                    </tr>
-                  ) : (
-                    <tr key={product.id}>
-                      <td>{product.id}</td>
-                      <td>{product.product_name}</td>
-                      <td>{product.price}₾</td>
-                      <td>
-                        <span className={`stock-label ${product.stock_status === 'In Stock' ? 'in-stock' : 'out-of-stock'}`}>
-                          {product.stock_status}
-                        </span>
-                      </td>
-                      <td>{product.dimension_data}</td>
-                      <td>
-                        <button onClick={() => startEdit(product)}>Edit</button>
-                        <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                      </td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </table>
-          </div>
-        ))}
-      </section>
-    </main>
-  </div>
-);
+        <section className="dashboard-section">
+          <h2 className="section-title">All Products</h2>
+          {Object.entries(grouped).map(([categoryId, items]) => (
+            <div key={categoryId} className="admin-table-card">
+              <h3 className="table-title">{categoryMap[categoryId] || `Category ID: ${categoryId}`}</h3>
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Dimensions</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map((product) =>
+                    editingProductId === product.id ? (
+                      <tr key={product.id}>
+                        <td>{product.id}</td>
+                        <td><input value={editData.photo_url} onChange={(e) => setEditData({ ...editData, photo_url: e.target.value })} placeholder="Image URL" /></td>
+                        <td><input value={editData.product_name} onChange={(e) => setEditData({ ...editData, product_name: e.target.value })} /></td>
+                        <td><input value={editData.price} onChange={(e) => setEditData({ ...editData, price: e.target.value })} /></td>
+                        <td>
+                          <select value={editData.stock_status} onChange={(e) => setEditData({ ...editData, stock_status: e.target.value })}>
+                            <option>In Stock</option>
+                            <option>Out of Stock</option>
+                          </select>
+                        </td>
+                        <td><input value={editData.dimension_data} onChange={(e) => setEditData({ ...editData, dimension_data: e.target.value })} /></td>
+                        <td>
+                          <button onClick={saveEdit}>Save</button>
+                          <button onClick={cancelEdit}>Cancel</button>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr key={product.id}>
+                        <td>{product.id}</td>
+                        <td>
+                          {product.photo_url ? (
+                            <img src={product.photo_url} alt={product.product_name} style={{ width: "60px", borderRadius: "6px" }} />
+                          ) : (
+                            "No Image"
+                          )}
+                        </td>
+                        <td>{product.product_name}</td>
+                        <td>{product.price}₾</td>
+                        <td>
+                          <span className={`stock-label ${product.stock_status === 'In Stock' ? 'in-stock' : 'out-of-stock'}`}>
+                            {product.stock_status}
+                          </span>
+                        </td>
+                        <td>{product.dimension_data}</td>
+                        <td>
+                          <button onClick={() => startEdit(product)}>Edit</button>
+                          <button onClick={() => deleteProduct(product.id)}>Delete</button>
+                        </td>
+                      </tr>
+                    )
+                  )}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </section>
+      </main>
+    </div>
+  );
 }

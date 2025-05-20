@@ -20,6 +20,13 @@ export default async function CategoryPage({ params }) {
         <div className="list_div">
           {products.map((product) => (
             <div key={product.id} className="product_card">
+              {product.photo_url && (
+                <img
+                  src={product.photo_url}
+                  alt={product.product_name}
+                  className="product-image"
+                />
+              )}
               <div className="text-lg font-bold">{product.product_name}</div>
               <div className="text-sm text-gray-700">{product.description}</div>
               <div className="price">ფასი: {product.price}₾</div>
