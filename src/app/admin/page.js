@@ -15,7 +15,7 @@ export default function AdminPage() {
     category_id: 1,
     photo_url: "",
   });
-
+  const [imagePreview, setImagePreview] = useState(null);
   const [editingProductId, setEditingProductId] = useState(null);
   const [editData, setEditData] = useState({});
 
@@ -30,8 +30,36 @@ export default function AdminPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const uploadForm = new FormData();
+    uploadForm.append("file", file);
+
+    const res = await fetch("/api/upload-image", {
+      method: "POST",
+      body: uploadForm,
+    });
+
+    const data = await res.json();
+
+    if (data.url) {
+      console.log("Uploaded image URL:", data.url); // ✅ You should see this
+      setFormData((prev) => ({
+        ...prev,
+        photo_url: data.url,
+      }));
+      setImagePreview(data.url);
+    } else {
+      alert("Upload failed.");
+    }
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Final formData before submit", formData);
     await fetch("/api/products/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -47,6 +75,7 @@ export default function AdminPage() {
       category_id: 1,
       photo_url: "",
     });
+    setImagePreview(null);
   };
 
   const refreshProducts = async () => {
@@ -109,7 +138,19 @@ export default function AdminPage() {
             <input name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" />
             <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleInput} className="inputStyle" />
             <input name="dimension_data" placeholder="Dimensions" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
-            <input name="photo_url" placeholder="Photo URL" value={formData.photo_url} onChange={handleInput} className="inputStyle" />
+            <input type="file" accept="image/*" onChange={handlePhotoChange} className="inputStyle" />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Preview"
+                style={{
+                  marginTop: "10px",
+                  maxWidth: "100%",
+                  borderRadius: "10px",
+                  boxShadow: "0 0 6px rgba(0,0,0,0.1)",
+                }}
+              />
+            )}
             <select name="stock_status" value={formData.stock_status} onChange={handleInput} className="inputStyle">
               <option>In Stock</option>
               <option>Out of Stock</option>
@@ -119,7 +160,14 @@ export default function AdminPage() {
                 <option key={cat.id} value={cat.id}>{cat.name} (ID: {cat.id})</option>
               ))}
             </select>
-            <button type="submit" className="submitButton">Add Product</button>
+            <button
+              type="submit"
+              className="submitButton"
+              disabled={!formData.photo_url}
+              style={{ opacity: formData.photo_url ? 1 : 0.5, cursor: formData.photo_url ? "pointer" : "not-allowed" }}
+            >
+              {formData.photo_url ? "Add Product" : "Upload Image First"}
+            </button>
           </form>
         </section>
 
