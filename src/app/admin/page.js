@@ -129,10 +129,10 @@ export default function AdminPage() {
   return (
     <div className="dashboard-container">
       <main className="dashboard-main">
-        <h1 className="admin-title">Admin Product Dashboard</h1>
+        <h1 className="admin-title">ინვენტარის ბაზა</h1>
 
         <section className="dashboard-section">
-          <h2 className="section-title">Add New Product</h2>
+          <h2 className="section-title">დამატება</h2>
           <form onSubmit={handleSubmit} className="admin-form">
             <input name="product_name" placeholder="Name" value={formData.product_name} onChange={handleInput} className="inputStyle" required />
             <input name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" />
@@ -172,7 +172,7 @@ export default function AdminPage() {
         </section>
 
         <section className="dashboard-section">
-          <h2 className="section-title">All Products</h2>
+          <h2 className="section-title">ყველა</h2>
           {Object.entries(grouped).map(([categoryId, items]) => (
             <div key={categoryId} className="admin-table-card">
               <h3 className="table-title">{categoryMap[categoryId] || `Category ID: ${categoryId}`}</h3>
