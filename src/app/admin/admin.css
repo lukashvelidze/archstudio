@@ -245,3 +245,11 @@ button:hover {
 .category-table tr:last-child td {
   border-bottom: none;
 }
+
+
+.admin-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  max-width: 600px;
+}

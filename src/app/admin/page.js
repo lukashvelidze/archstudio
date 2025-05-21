@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import "./admin.css";
 
+
 export default function AdminPage() {
   const [products, setProducts] = useState([]);
   const [tables, setTables] = useState({});
@@ -18,6 +19,9 @@ export default function AdminPage() {
   const [imagePreview, setImagePreview] = useState(null);
   const [editingProductId, setEditingProductId] = useState(null);
   const [editData, setEditData] = useState({});
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [stockFilter, setStockFilter] = useState("All");
 
   useEffect(() => {
     refreshProducts();
@@ -115,7 +119,18 @@ export default function AdminPage() {
   };
 
   const grouped = products.reduce((acc, product) => {
-    const key = product.category_id;
+  const key = product.category_id;
+
+  // ✅ Apply search + filter
+  const matchesSearch =
+    product.product_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.description.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesStock =
+      stockFilter === "All" || product.stock_status === stockFilter;
+
+    if (!matchesSearch || !matchesStock) return acc;
+
     if (!acc[key]) acc[key] = [];
     acc[key].push(product);
     return acc;
@@ -130,6 +145,26 @@ export default function AdminPage() {
     <div className="dashboard-container">
       <main className="dashboard-main">
         <h1 className="admin-title">ინვენტარის ბაზა</h1>
+
+         <div className="admin-filters">
+          <input
+            type="text"
+            placeholder="Search by name or description"
+            className="inputStyle"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+
+          <select
+            className="inputStyle"
+            value={stockFilter}
+            onChange={(e) => setStockFilter(e.target.value)}
+          >
+            <option value="All">All Stock Status</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Out of Stock">Out of Stock</option>
+          </select>
+        </div>
 
         <section className="dashboard-section">
           <h2 className="section-title">დამატება</h2>
