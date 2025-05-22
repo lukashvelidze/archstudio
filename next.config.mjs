@@ -1,7 +1,7 @@
 // next.config.mjs
 export default {
   images: {
-    unoptimized: true,
+    unoptimized: true
   },
-  basePath: '',
+  basePath: ''
 };
