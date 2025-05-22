@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import "./admin.css";
 
-
 export default function AdminPage() {
   const [products, setProducts] = useState([]);
   const [tables, setTables] = useState({});
@@ -12,14 +11,13 @@ export default function AdminPage() {
     description: "",
     price: "",
     dimension_data: "",
-    stock_status: "In Stock",
+    stock_quantity: 0,
     category_id: 1,
     photo_url: "",
   });
   const [imagePreview, setImagePreview] = useState(null);
   const [editingProductId, setEditingProductId] = useState(null);
   const [editData, setEditData] = useState({});
-
   const [searchQuery, setSearchQuery] = useState("");
   const [stockFilter, setStockFilter] = useState("All");
 
@@ -49,7 +47,6 @@ export default function AdminPage() {
     const data = await res.json();
 
     if (data.url) {
-      console.log("Uploaded image URL:", data.url); // ✅ You should see this
       setFormData((prev) => ({
         ...prev,
         photo_url: data.url,
@@ -60,10 +57,8 @@ export default function AdminPage() {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Final formData before submit", formData);
     await fetch("/api/products/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -75,7 +70,7 @@ export default function AdminPage() {
       description: "",
       price: "",
       dimension_data: "",
-      stock_status: "In Stock",
+      stock_quantity: 0,
       category_id: 1,
       photo_url: "",
     });
@@ -94,16 +89,19 @@ export default function AdminPage() {
   };
 
   const cancelEdit = () => {
-    setEditingProductId(null);
-    setEditData({});
+  setEditingProductId(null);
+  setEditData({});
   };
 
   const saveEdit = async () => {
+  const { stock_quantity_input, ...cleanedData } = editData;
+
     await fetch("/api/products/edit", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(editData),
+      body: JSON.stringify(cleanedData),
     });
+
     setEditingProductId(null);
     setEditData({});
     refreshProducts();
@@ -119,18 +117,15 @@ export default function AdminPage() {
   };
 
   const grouped = products.reduce((acc, product) => {
-  const key = product.category_id;
-
-  // ✅ Apply search + filter
-  const matchesSearch =
-    product.product_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.description.toLowerCase().includes(searchQuery.toLowerCase());
-
+    const key = product.category_id;
+    const matchesSearch =
+      product.product_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesStock =
-      stockFilter === "All" || product.stock_status === stockFilter;
-
+      stockFilter === "All" ||
+      (stockFilter === "In Stock" && product.stock_quantity > 0) ||
+      (stockFilter === "Out of Stock" && product.stock_quantity === 0);
     if (!matchesSearch || !matchesStock) return acc;
-
     if (!acc[key]) acc[key] = [];
     acc[key].push(product);
     return acc;
@@ -145,8 +140,7 @@ export default function AdminPage() {
     <div className="dashboard-container">
       <main className="dashboard-main">
         <h1 className="admin-title">ინვენტარის ბაზა</h1>
-
-         <div className="admin-filters">
+        <div className="admin-filters">
           <input
             type="text"
             placeholder="Search by name or description"
@@ -154,7 +148,6 @@ export default function AdminPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-
           <select
             className="inputStyle"
             value={stockFilter}
@@ -165,7 +158,6 @@ export default function AdminPage() {
             <option value="Out of Stock">Out of Stock</option>
           </select>
         </div>
-
         <section className="dashboard-section">
           <h2 className="section-title">დამატება</h2>
           <form onSubmit={handleSubmit} className="admin-form">
@@ -173,39 +165,21 @@ export default function AdminPage() {
             <input name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" />
             <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleInput} className="inputStyle" />
             <input name="dimension_data" placeholder="Dimensions" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
+            <input name="stock_quantity" type="number" placeholder="Quantity" min="0" value={formData.stock_quantity} onChange={handleInput} className="inputStyle" />
             <input type="file" accept="image/*" onChange={handlePhotoChange} className="inputStyle" />
             {imagePreview && (
-              <img
-                src={imagePreview}
-                alt="Preview"
-                style={{
-                  marginTop: "10px",
-                  maxWidth: "100%",
-                  borderRadius: "10px",
-                  boxShadow: "0 0 6px rgba(0,0,0,0.1)",
-                }}
-              />
+              <img src={imagePreview} alt="Preview" style={{ marginTop: "10px", maxWidth: "100%", borderRadius: "10px", boxShadow: "0 0 6px rgba(0,0,0,0.1)" }} />
             )}
-            <select name="stock_status" value={formData.stock_status} onChange={handleInput} className="inputStyle">
-              <option>In Stock</option>
-              <option>Out of Stock</option>
-            </select>
             <select name="category_id" value={formData.category_id} onChange={handleInput} className="inputStyle">
               {(tables.Categories || []).map((cat) => (
                 <option key={cat.id} value={cat.id}>{cat.name} (ID: {cat.id})</option>
               ))}
             </select>
-            <button
-              type="submit"
-              className="submitButton"
-              disabled={!formData.photo_url}
-              style={{ opacity: formData.photo_url ? 1 : 0.5, cursor: formData.photo_url ? "pointer" : "not-allowed" }}
-            >
+            <button type="submit" className="submitButton" disabled={!formData.photo_url} style={{ opacity: formData.photo_url ? 1 : 0.5, cursor: formData.photo_url ? "pointer" : "not-allowed" }}>
               {formData.photo_url ? "Add Product" : "Upload Image First"}
             </button>
           </form>
         </section>
-
         <section className="dashboard-section">
           <h2 className="section-title">ყველა</h2>
           {Object.entries(grouped).map(([categoryId, items]) => (
@@ -232,10 +206,30 @@ export default function AdminPage() {
                         <td><input value={editData.product_name} onChange={(e) => setEditData({ ...editData, product_name: e.target.value })} /></td>
                         <td><input value={editData.price} onChange={(e) => setEditData({ ...editData, price: e.target.value })} /></td>
                         <td>
-                          <select value={editData.stock_status} onChange={(e) => setEditData({ ...editData, stock_status: e.target.value })}>
-                            <option>In Stock</option>
-                            <option>Out of Stock</option>
-                          </select>
+                          <input
+                            type="text"
+                            placeholder="e.g. +5, -2, 10"
+                            value={editData.stock_quantity_input ?? editData.stock_quantity}
+                            onChange={(e) => {
+                              const value = e.target.value.trim();
+
+                              // Default to current quantity
+                              let newQuantity = editData.stock_quantity;
+
+                              if (/^[+-]\d+$/.test(value)) {
+                                newQuantity = Math.max(0, editData.stock_quantity + parseInt(value));
+                              } else if (/^\d+$/.test(value)) {
+                                newQuantity = parseInt(value);
+                              }
+
+                              setEditData({
+                                ...editData,
+                                stock_quantity_input: value,
+                                stock_quantity: newQuantity,
+                              });
+                            }}
+                          />
+
                         </td>
                         <td><input value={editData.dimension_data} onChange={(e) => setEditData({ ...editData, dimension_data: e.target.value })} /></td>
                         <td>
@@ -256,8 +250,10 @@ export default function AdminPage() {
                         <td>{product.product_name}</td>
                         <td>{product.price}₾</td>
                         <td>
-                          <span className={`stock-label ${product.stock_status === 'In Stock' ? 'in-stock' : 'out-of-stock'}`}>
-                            {product.stock_status}
+                          <span className={`stock-label ${product.stock_quantity > 0 ? 'in-stock' : 'out-of-stock'}`}>
+                            {product.stock_quantity > 0
+                              ? `In Stock (${product.stock_quantity})`
+                              : "Out of Stock (0)"}
                           </span>
                         </td>
                         <td>{product.dimension_data}</td>

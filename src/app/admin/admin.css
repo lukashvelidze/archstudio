@@ -182,20 +182,23 @@ body {
 
 .stock-label {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 9999px;
+  padding: 4px 10px;
+  border-radius: 12px;
   font-weight: 600;
   font-size: 0.85rem;
+  white-space: nowrap;
 }
 
 .in-stock {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
 }
 
 .out-of-stock {
   background-color: #fee2e2;
-  color: #991b1b;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
 }
 
 button {
@@ -249,7 +252,14 @@ button:hover {
 
 .admin-filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 20px;
-  max-width: 600px;
+  margin: 1.5rem auto;
+  justify-content: center;
+  max-width: 800px;
 }
+
+.admin-filters .inputStyle {
+  min-width: 200px;
+}
+
