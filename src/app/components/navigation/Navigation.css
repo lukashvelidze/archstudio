@@ -1,0 +1,19 @@
+.linkP:hover {
+    border-bottom: 2px solid red;
+}
+
+.headerRoutes.show {
+    transition: right 0.3s ease;
+}
+
+.bars {
+    display: none;
+    cursor: pointer;
+}
+
+.linkP {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(50, 41, 41);
+    letter-spacing: 1px;
+}

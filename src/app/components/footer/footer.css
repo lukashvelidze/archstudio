@@ -1,0 +1,24 @@
+.footerDiv {
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(223, 223, 223);
+
+}
+
+.contactDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+.footerPhoneDiv,
+.footerMailDiv,
+.addressDiv {
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    gap: 12px;
+}
