@@ -161,11 +161,11 @@ export default function AdminPage() {
         <section className="dashboard-section">
           <h2 className="section-title">დამატება</h2>
           <form onSubmit={handleSubmit} className="admin-form">
-            <input name="product_name" placeholder="Name" value={formData.product_name} onChange={handleInput} className="inputStyle" required />
-            <textarea name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" rows={4} />
-            <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleInput} className="inputStyle" />
-            <input name="dimension_data" placeholder="Dimensions" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
-            <input name="stock_quantity" type="number" placeholder="Quantity" min="0" value={formData.stock_quantity} onChange={handleInput} className="inputStyle" />
+            <input name="product_name" placeholder="დასახელება" value={formData.product_name} onChange={handleInput} className="inputStyle" required />
+            <textarea name="description" placeholder="აღწერა" value={formData.description} onChange={handleInput} className="inputStyle" rows={4} />
+            <input name="price" type="number" placeholder="ფასი" value={formData.price} onChange={handleInput} className="inputStyle" />
+            <input name="dimension_data" placeholder="ზომა / წონა" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
+            <input name="stock_quantity" type="number" placeholder="მარაგში" min="0" value={formData.stock_quantity} onChange={handleInput} className="inputStyle" />
             <input type="file" accept="image/*" onChange={handlePhotoChange} className="inputStyle" />
             {imagePreview && (
               <img src={imagePreview} alt="Preview" style={{ marginTop: "10px", maxWidth: "100%", borderRadius: "10px", boxShadow: "0 0 6px rgba(0,0,0,0.1)" }} />
