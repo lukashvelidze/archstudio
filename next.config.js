@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '/Archstudio', // 
+  basePath: '/Archstudio',
 };
 
 module.exports = nextConfig;
