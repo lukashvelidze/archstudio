@@ -89,12 +89,12 @@ export default function AdminPage() {
   };
 
   const cancelEdit = () => {
-  setEditingProductId(null);
-  setEditData({});
+    setEditingProductId(null);
+    setEditData({});
   };
 
   const saveEdit = async () => {
-  const { stock_quantity_input, ...cleanedData } = editData;
+    const { stock_quantity_input, ...cleanedData } = editData;
 
     await fetch("/api/products/edit", {
       method: "PUT",
@@ -162,7 +162,7 @@ export default function AdminPage() {
           <h2 className="section-title">დამატება</h2>
           <form onSubmit={handleSubmit} className="admin-form">
             <input name="product_name" placeholder="Name" value={formData.product_name} onChange={handleInput} className="inputStyle" required />
-            <input name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" />
+            <textarea name="description" placeholder="Description" value={formData.description} onChange={handleInput} className="inputStyle" rows={4} />
             <input name="price" type="number" placeholder="Price" value={formData.price} onChange={handleInput} className="inputStyle" />
             <input name="dimension_data" placeholder="Dimensions" value={formData.dimension_data} onChange={handleInput} className="inputStyle" />
             <input name="stock_quantity" type="number" placeholder="Quantity" min="0" value={formData.stock_quantity} onChange={handleInput} className="inputStyle" />
@@ -189,12 +189,12 @@ export default function AdminPage() {
                 <thead>
                   <tr>
                     <th>ID</th>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                    <th>Dimensions</th>
-                    <th>Actions</th>
+                    <th>სურათი</th>
+                    <th>დასახელება</th>
+                    <th>ფასი</th>
+                    <th>მარაგი</th>
+                    <th>ზომა / წონა</th>
+                    <th>აღწერა</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -212,16 +212,12 @@ export default function AdminPage() {
                             value={editData.stock_quantity_input ?? editData.stock_quantity}
                             onChange={(e) => {
                               const value = e.target.value.trim();
-
-                              // Default to current quantity
                               let newQuantity = editData.stock_quantity;
-
                               if (/^[+-]\d+$/.test(value)) {
                                 newQuantity = Math.max(0, editData.stock_quantity + parseInt(value));
                               } else if (/^\d+$/.test(value)) {
                                 newQuantity = parseInt(value);
                               }
-
                               setEditData({
                                 ...editData,
                                 stock_quantity_input: value,
@@ -229,9 +225,16 @@ export default function AdminPage() {
                               });
                             }}
                           />
-
                         </td>
                         <td><input value={editData.dimension_data} onChange={(e) => setEditData({ ...editData, dimension_data: e.target.value })} /></td>
+                        <td>
+                          <textarea
+                            value={editData.description || ""}
+                            onChange={(e) => setEditData({ ...editData, description: e.target.value })}
+                            rows={4}
+                            className="inputStyle"
+                          />
+                        </td>
                         <td>
                           <button onClick={saveEdit}>Save</button>
                           <button onClick={cancelEdit}>Cancel</button>
@@ -257,6 +260,7 @@ export default function AdminPage() {
                           </span>
                         </td>
                         <td>{product.dimension_data}</td>
+                        <td style={{ whiteSpace: "pre-line" }}>{product.description}</td>
                         <td>
                           <button onClick={() => startEdit(product)}>Edit</button>
                           <button onClick={() => deleteProduct(product.id)}>Delete</button>

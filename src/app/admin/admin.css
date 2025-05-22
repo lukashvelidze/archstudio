@@ -113,6 +113,12 @@ body {
   transition: var(--transition);
 }
 
+textarea.inputStyle {
+  resize: vertical;
+  font-family: inherit;
+  white-space: pre-wrap;
+}
+
 .inputStyle:focus {
   outline: none;
   border-color: var(--primary);

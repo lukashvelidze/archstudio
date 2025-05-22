@@ -28,7 +28,10 @@ export default async function CategoryPage({ params }) {
                 />
               )}
               <div className="text-lg font-bold">{product.product_name}</div>
-              <div className="text-sm text-gray-700">{product.description}</div>
+              <div className="text-sm text-gray-700" style={{ whiteSpace: "pre-line" }}>
+                {product.description}
+              </div>
+
               <div className="price">ფასი: {product.price}₾</div>
               <div className="text-sm">ზომები: {product.dimension_data}</div>
               <div
