@@ -1,10 +1,7 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',
+// next.config.mjs
+export default {
   images: {
     unoptimized: true,
   },
-  basePath: '/Archstudio',
+  basePath: '',
 };
-
-module.exports = nextConfig;
