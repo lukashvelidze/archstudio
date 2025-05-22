@@ -1,33 +1,38 @@
-.headerDiv {
-    position: fixed;
-    width: 100%;
-    padding: 24px 48px;
-    background-color: rgb(223, 223, 223, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 100;
+/* MAIN FIXED NAVBAR */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  width: 100%;
+  background-color: rgb(223, 223, 223, 0.8); /* keep your translucent gray */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* NAVBAR CHILDREN */
 .headerLogo {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .phoneDiv {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-
-
 .headerRoutes {
-    display: flex;
-    align-items: center;
-    gap: 40px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
 
 .phoneDiv:hover {
-    scale: 1.1;
-    transition: 0.4s linear;
+  scale: 1.1;
+  transition: 0.4s linear;
 }

@@ -1,30 +1,33 @@
-import Link from "next/link"
-import './productPage.css'
-import { routes } from "../constants/routes"
+// /app/product/page.js
+import Link from "next/link";
+import "./productPage.css";
 
+export default async function ProductPage() {
+  const res = await fetch("http://localhost:3000/api/categories", {
+    cache: "no-store",
+  });
 
-export default function Product() {
+  if (!res.ok) {
+    return <div>კატეგორიების ჩატვირთვა ვერ მოხერხდა</div>;
+  }
+
+  const categories = await res.json();
+
   return (
-    <div className="productMainDiv">
-      {/* <h1 className="productTitle" >პროდუქცია</h1> */}
-      <div className="routesDiv">
-        <Link href={routes.detectors} rel="preload" >
-          <div className="routes detimg" > დეტექცია </div>
-        </Link>
-        <Link href={routes.smokesystem} rel="preload" >
-          <div className="routes"> კვამლის საწინააღმდეგო ვენტილაცია </div>
-        </Link>
-        <Link href={routes.watersystem} rel="preload" >
-          <div className="routes">წყლის სისტემა</div>
-        </Link>
-        <Link href={routes.evacuation} rel="preload" >
-          <div className="routes" > ადამიანთა ევაკუაციის მართვის სისტემა </div>
-        </Link>
-        <Link href={routes.broadcasting} rel="preload" >
-          <div className="routes" > ტექსტური მაუწყებლობა </div>
-        </Link>
+    <div className="category_bg">
+      <div>
+        <h1 className="category_title">
+          პროდუქციის კატეგორიები
+        </h1>
 
+        <div className="category_div">
+          {categories.map((cat) => (
+            <Link key={cat.id} href={`/product/category/${cat.id}`}>
+              <div className="category_card">{cat.name}</div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
-  )
+  );
 }
