@@ -1,15 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-export default nextConfig;
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',
+export default {
   images: {
-    unoptimized: true, // Required if you're using <Image />
+    unoptimized: true
   },
-  basePath: '/your-repo-name', // Important for routing!
+  basePath: ''
 };
-
-module.exports = nextConfig;
