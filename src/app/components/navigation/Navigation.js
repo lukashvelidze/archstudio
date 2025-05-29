@@ -16,11 +16,12 @@ export default function Navigation() {
     return (
         <>
             <div className={`headerRoutes ${menuOpen ? 'show' : ''}`}> 
-                <Link href={routes.home} className="linkP linkF" rel="preload" >მთავარი</Link>
-                <Link href={routes.product} className="linkP" rel="preload" >პროდუქცია</Link>
-                <Link href={routes.design} className="linkP" rel="preload" >პროექტირება</Link>
-                <Link href={routes.installation} className="linkP" rel="preload" >ინსტალაცია</Link>
-                <Link href={routes.contact} className="linkP linkL" rel="preload" >კონტაქტი</Link>
+                <Link href={routes.home} className="linkP linkF" rel="preload" onClick={() => setMenuOpen(false)}>მთავარი</Link>
+                <Link href={routes.product} className="linkP" rel="preload" onClick={() => setMenuOpen(false)}>პროდუქცია</Link>
+                <Link href={routes.design} className="linkP" rel="preload" onClick={() => setMenuOpen(false)}>პროექტირება</Link>
+                <Link href={routes.installation} className="linkP" rel="preload" onClick={() => setMenuOpen(false)}>ინსტალაცია</Link>
+                <Link href={routes.contact} className="linkP linkL" rel="preload" onClick={() => setMenuOpen(false)}>კონტაქტი</Link>
+                <Link href="/admin" className="linkP linkAdminMobile" rel="preload" onClick={() => setMenuOpen(false)}>ადმინი</Link>
             </div>
             <Image src='/images/bars.svg' width={24} height={24} alt='bars' className='bars' onClick={toggleMenu} /> 
         </>

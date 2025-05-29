@@ -41,3 +41,16 @@ a {
   }
 } 
 */
+/* Desktop only */
+@media (min-width: 769px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
+/* Optional: remove any global padding on mobile */
+@media (max-width: 768px) {
+  body {
+    padding-top: 0;
+  }
+}

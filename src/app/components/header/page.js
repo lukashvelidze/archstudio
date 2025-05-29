@@ -17,7 +17,6 @@ export default function Header() {
                 <a href='tel:+995 598 11 15 07' style={{color:'black'}} > +995 598 11 15 07</a>
             </div>
             <Navigation />
-            <Link href="/admin">ადმინის გვერდი</Link>
         </div>
     )
 }

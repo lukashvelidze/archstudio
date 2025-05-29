@@ -1,10 +1,39 @@
-@media (max-width: 500px) {
-    .headerLogo {
-        width: 40px;
-        height: 40px;
-    }
+@media (max-width: 768px) {
+  body {
+    padding-top: 80px !important;
+  }
 
-    .headerDiv {
-        padding: 24px;
-    }
+  .header {
+    height: 80px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+  }
+
+  .headerLogo {
+    width: 60px !important;
+    height: auto !important;
+  }
+
+  .phoneDiv {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+  }
+
+  .bars {
+    display: block;
+    position: relative;
+    z-index: 1001;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+  }
+
+  .backgroundImage {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
 }
