@@ -2,6 +2,13 @@
     border-bottom: 2px solid red;
 }
 
+.headerRoutes {
+    display: flex;
+    gap: 24px; /* Add spacing between buttons */
+    align-items: center;
+}
+
+
 .headerRoutes.show {
     transition: right 0.3s ease;
 }
@@ -16,4 +23,16 @@
     font-weight: 600;
     color: rgb(50, 41, 41);
     letter-spacing: 1px;
+}
+
+.adminIcon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.adminIcon:hover {
+  opacity: 1;
 }
