@@ -14,7 +14,14 @@ export async function GET() {
         stock_quantity
       FROM Products
     `);
-    return new Response(JSON.stringify(rows), { status: 200 });
+
+    // Add stock_status based on stock_quantity
+    const products = rows.map(product => ({
+      ...product,
+      stock_status: product.stock_quantity > 0 ? "მაჩვენებელია" : "ამოიწურა"
+    }));
+
+    return new Response(JSON.stringify(products), { status: 200 });
   } catch (err) {
     return new Response(JSON.stringify({ error: "Failed to fetch products" }), { status: 500 });
   }
