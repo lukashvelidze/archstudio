@@ -12,7 +12,7 @@ export default function Contact() {
       <div className="contact-info">
         <p><strong>ტელეფონი:</strong> +995 599 12 34 56</p>
         <p><strong>ელ. ფოსტა:</strong> info@archstudio.ge</p>
-        <p><strong>მისამართი:</strong> თბილისი, საქართველო</p>
+        <p><strong>მისამართი:</strong> მედეა ჯუღელის ქუჩა N1, თბილისი, საქართველო</p>
       </div>
 
       <div className="contact-form">

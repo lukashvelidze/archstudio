@@ -48,3 +48,22 @@ a {
 * {
     box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.pageWrapper {
+  padding-top: 80px; /* height of your fixed header */
+  min-height: calc(100vh - 80px - 100px); /* full height minus header & footer */
+  padding-bottom: 40px;
+}
+
+footer {
+  height: 100px;
+  background: #f3f3f3;
+  padding: 20px;
+  text-align: center;
+}

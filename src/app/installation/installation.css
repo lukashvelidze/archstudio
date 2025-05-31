@@ -1,0 +1,48 @@
+.installationPage {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.installationTitle {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.installationIntro {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.installationGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.installCard {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  padding: 16px;
+  text-align: center;
+}
+
+.installCard img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.installCard h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.installCard p {
+  font-size: 16px;
+}

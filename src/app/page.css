@@ -1,9 +1,5 @@
 /* ===== Layout Fixes for Navbar ===== */
 
-body {
-  padding-top: 80px; /* Prevent content from hiding under the navbar */
-}
-
 nav {
   position: fixed;
   top: 0;
@@ -14,7 +10,6 @@ nav {
   z-index: 100;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-
 
 /* ===== Global Layout and Home Styling ===== */
 
@@ -39,9 +34,8 @@ nav {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 400px;
+  min-height: calc(100vh - 80px);
 }
-
 
 /* ===== Button Animations ===== */
 
@@ -81,7 +75,6 @@ nav {
   scale: 1.03;
 }
 
-
 /* ===== Section Layouts ===== */
 
 .serviceDiv,
@@ -100,7 +93,6 @@ nav {
   font-size: 18px;
   line-height: 0.7cm;
 }
-
 
 /* ===== Animations ===== */
 
@@ -136,6 +128,8 @@ nav {
     opacity: 1;
   }
 }
+
+/* ===== Mobile Styles ===== */
 
 @media (max-width: 768px) {
   .container {
@@ -200,11 +194,10 @@ nav {
     padding-top: 16px;
     max-width: 90%;
     margin: 0 auto;
-
-  
   }
-
 }
+
+/* ===== Offers Section ===== */
 
 .offersSection {
   text-align: center;
@@ -222,7 +215,7 @@ nav {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
 }
 
@@ -241,6 +234,8 @@ nav {
   padding: 16px;
   font-size: 16px;
 }
+
+/* ===== Projects Section ===== */
 
 .projectsSection {
   padding: 60px 20px;

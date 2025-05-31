@@ -21,19 +21,19 @@ export const metadata = {
   },
 };
 
-
-
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="ka">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header/>
-        {children}
-        <Footer/>
+        <div className="layoutWrapper">
+          <Header />
+          <main className="pageWrapper">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

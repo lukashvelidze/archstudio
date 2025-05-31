@@ -54,3 +54,21 @@ a {
     padding-top: 0;
   }
 }
+
+.layoutWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pageWrapper {
+  flex: 1;
+  padding-top: 80px; /* header height */
+  padding-bottom: 40px;
+}
+
+footer {
+  background: #eee;
+  padding: 20px;
+  text-align: center;
+}
