@@ -205,3 +205,60 @@ nav {
   }
 
 }
+
+.offersSection {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.offerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.offerCard {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.offerCard:hover {
+  transform: translateY(-6px);
+}
+
+.offerCard img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.offerCard p {
+  font-weight: 600;
+  padding: 16px;
+  font-size: 16px;
+}
+
+.projectsSection {
+  padding: 60px 20px;
+  background-color: #f8f8f8;
+  text-align: center;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.projectsGrid img,
+.projectsGrid video {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  height: 200px;
+}
