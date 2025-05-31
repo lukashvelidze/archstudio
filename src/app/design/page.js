@@ -12,9 +12,9 @@ export default function Design() {
       </p>
 
       <div className="designGrid">
-        <img src="/images/design1.jpg" alt="Architectural Concept" />
-        <img src="/images/design2.jpg" alt="Planning Process" />
-        <img src="/images/design3.jpg" alt="Final Layout" />
+        <img src="/images/project1.jpg" alt="Architectural Concept" />
+        <img src="/images/project2.jpg" alt="Planning Process" />
+        <img src="/images/project3.jpg" alt="Final Layout" />
       </div>
 
       <div className="designHighlights">

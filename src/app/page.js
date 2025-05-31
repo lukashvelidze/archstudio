@@ -35,31 +35,40 @@ export default function HomePage() {
 
       <section className="offersSection">
         <div className="offerGrid">
-          <div className="offerCard">
-            <img src="/images/offer1.jpg" alt="Offer 1" />
-            <p>ცეცხლსაწინააღმდეგო სისტემები</p>
-          </div>
-          <div className="offerCard">
-            <img src="/images/offer2.jpg" alt="Offer 2" />
-            <p>პროექტირება და კონსულტაცია</p>
-          </div>
-          <div className="offerCard">
-            <img src="/images/offer3.jpg" alt="Offer 3" />
-            <p>ინსტალაცია და ტესტირება</p>
-          </div>
+          <Link href="./product" className="cardLink">
+            <div className="offerCard">
+              <img src="/images/offer1.jpg" alt="Design" />
+              <p>პროდუქცია</p>
+            </div>
+          </Link>
+
+          <Link href="./installation" className="cardLink">
+            <div className="offerCard">
+              <img src="/images/offer2.jpg" alt="Installation" />
+              <p>ინსტალაცია</p>
+            </div>
+          </Link>
+
+          <Link href="./design" className="cardLink">
+            <div className="offerCard">
+              <img src="/images/offer3.jpg" alt="Products" />
+              <p>პროექტირება</p>
+            </div>
+          </Link>
         </div>
       </section>
+
 
       <div className='projects'>
         <h1 className='projects_title'>შესრულებული პროექტები</h1>
         <div className="projectsGrid">
-          <img src="/images/project1.jpg" alt="Project 1" />
-          <img src="/images/project2.jpg" alt="Project 2" />
+          <img src="/images/project1.jpg" alt="project 1" />
+          <img src="/images/project2.jpg" alt="project 2" />
           <video controls>
             <source src="/videos/projectVid1.mp4" type="video/mp4" />
             თქვენი ბრაუზერი არ უჭერს მხარს ვიდეოს ჩაშენებას.
           </video>
-          <img src="/images/project3.jpg" alt="Project 3" />
+          <img src="/images/project3.jpg" alt="project 3" />
         </div>
       </div>
     </div>
