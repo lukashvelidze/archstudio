@@ -8,7 +8,7 @@ export async function POST(req) {
       description,
       price,
       dimension_data,
-      stock_status,
+      stock_quantity,
       category_id,
       photo_url, // ✅ Add this
     } = body;
@@ -28,7 +28,7 @@ export async function POST(req) {
         description,
         price,
         dimension_data,
-        stock_status,
+        stock_quantity,
         category_id,
         photo_url, // ✅ Include this
       ]
