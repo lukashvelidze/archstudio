@@ -1,9 +1,14 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import "./admin.css";
 
 export default function AdminPage() {
+  const router = useRouter();
+  const [authorized, setAuthorized] = useState(false);
+  const [ready, setReady] = useState(false);
+
   const [products, setProducts] = useState([]);
   const [tables, setTables] = useState({});
   const [formData, setFormData] = useState({
@@ -21,12 +26,27 @@ export default function AdminPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [stockFilter, setStockFilter] = useState("All");
 
+  // Login check
   useEffect(() => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (isLoggedIn === 'true') {
+      setAuthorized(true);
+    } else {
+      router.replace('/login');
+    }
+    setReady(true);
+  }, [router]);
+
+  // Load data only if authorized
+  useEffect(() => {
+    if (!authorized) return;
     refreshProducts();
     fetch("/api/admin/db-tables")
       .then((res) => res.json())
       .then((data) => setTables(data));
-  }, []);
+  }, [authorized]);
+
+  if (!ready || !authorized) return null;
 
   const handleInput = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,10 +67,7 @@ export default function AdminPage() {
     const data = await res.json();
 
     if (data.url) {
-      setFormData((prev) => ({
-        ...prev,
-        photo_url: data.url,
-      }));
+      setFormData((prev) => ({ ...prev, photo_url: data.url }));
       setImagePreview(data.url);
     } else {
       alert("Upload failed.");
