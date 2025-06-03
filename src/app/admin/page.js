@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import "./admin.css";
 
+
 export default function AdminPage() {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
@@ -294,3 +295,5 @@ export default function AdminPage() {
     </div>
   );
 }
+
+
