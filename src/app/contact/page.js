@@ -10,20 +10,24 @@ export default function Contact() {
       </p>
 
       <div className="contact-info">
-        <p><strong>ტელეფონი:</strong> +995 599 12 34 56</p>
-        <p><strong>ელ. ფოსტა:</strong> info@archstudio.ge</p>
-        <p><strong>მისამართი:</strong> მედეა ჯუღელის ქუჩა N1, თბილისი, საქართველო</p>
+        <div className="contact-card">
+          <h2>ტელეფონი</h2>
+          <p>+995 599 12 34 56</p>
+        </div>
+        <div className="contact-card">
+          <h2>ელ. ფოსტა</h2>
+          <p>info@archstudio.ge</p>
+        </div>
+        <div className="contact-card">
+          <h2>მისამართი</h2>
+          <p>მედეა ჯუღელის ქუჩა N1, თბილისი, საქართველო</p>
+        </div>
       </div>
 
-      <div className="contact-form">
-        <h2>მოგვწერეთ</h2>
-        <form>
-          <input type="text" placeholder="სახელი და გვარი" required />
-          <input type="email" placeholder="ელ. ფოსტა" required />
-          <textarea placeholder="თქვენი შეტყობინება" required></textarea>
-          <button type="submit">გაგზავნა</button>
-        </form>
+      <div className="map-placeholder">
+        <p>📍 აქ შეიძლება იყოს რუკა ან მდებარეობის სქემა</p>
       </div>
     </div>
   )
 }
+

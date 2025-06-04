@@ -134,6 +134,13 @@ export default function AdminPage() {
     refreshProducts();
   };
 
+  const handleLogout = () => {
+  localStorage.removeItem('isLoggedIn');
+  setAuthorized(false);
+  router.replace('/login');
+};
+
+
   const grouped = products.reduce((acc, product) => {
     const key = product.category_id;
     const matchesSearch =
@@ -158,6 +165,12 @@ export default function AdminPage() {
     <div className="dashboard-container">
       <main className="dashboard-main">
         <h1 className="admin-title">ინვენტარის ბაზა</h1>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+          <button onClick={handleLogout} className="logoutButton">
+            Log Out
+          </button>
+        </div>
+
         <div className="admin-filters">
           <input
             type="text"
