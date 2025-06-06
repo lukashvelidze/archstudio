@@ -162,14 +162,23 @@ export default function AdminPage() {
   });
 
   return (
+
     <div className="dashboard-container">
+      <nav className="admin-top-nav">
+        <div className="admin-nav-container">
+          <div className="nav-center">
+            <a href="/admin" className="nav-link">Dashboard</a>
+            <a href="/admin/tools/water-usage" className="nav-link">Water Usage</a>
+          </div>
+          <div className="nav-right">
+            <button onClick={handleLogout} className="logoutButton">Log Out</button>
+          </div>
+        </div>
+      </nav>
+
+
       <main className="dashboard-main">
         <h1 className="admin-title">ინვენტარის ბაზა</h1>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
-          <button onClick={handleLogout} className="logoutButton">
-            Log Out
-          </button>
-        </div>
 
         <div className="admin-filters">
           <input
