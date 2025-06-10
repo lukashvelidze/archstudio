@@ -12,7 +12,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     // Simple hardcoded credentials
-    if (username === 'admin' && password === 'secret123') {
+    if (username === 'admin' && password === 'admin') {
       localStorage.setItem('isLoggedIn', 'true');
       router.push('/admin');
     } else {

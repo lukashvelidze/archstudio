@@ -168,7 +168,14 @@ export default function AdminPage() {
         <div className="admin-nav-container">
           <div className="nav-center">
             <a href="/admin" className="nav-link">Dashboard</a>
-            <a href="/admin/tools/water-usage" className="nav-link">Water Usage</a>
+            <a 
+              href="https://docs.google.com/spreadsheets/d/1xw9LUJsM5WWOWQNOXOX4lD8voO9ayypYthALIXo6kUk/edit?gid=0#gid=0" 
+              className="nav-link" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              შეკვეთები
+            </a>
           </div>
           <div className="nav-right">
             <button onClick={handleLogout} className="logoutButton">Log Out</button>
