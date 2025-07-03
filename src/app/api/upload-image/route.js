@@ -14,28 +14,43 @@ export async function POST(req) {
     const file = data.get("file");
 
     if (!file) {
-      return new Response(JSON.stringify({ error: "No file uploaded" }), { status: 400 });
+      return new Response(JSON.stringify({ error: "No file uploaded" }), {
+        status: 400,
+      });
+    }
+
+    if (typeof file.arrayBuffer !== "function") {
+      return new Response(
+        JSON.stringify({ error: "Invalid file object" }),
+        { status: 400 }
+      );
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
     const uploaded = await new Promise((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream({}, (err, result) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { resource_type: "auto" },
+        (err, result) => {
           if (err) {
             console.error("Cloudinary error:", err);
             reject(err);
           } else {
             resolve(result);
           }
-        })
-        .end(buffer);
+        }
+      );
+      stream.end(buffer);
     });
 
-    return new Response(JSON.stringify({ url: uploaded.secure_url }), { status: 200 });
+    return new Response(JSON.stringify({ url: uploaded.secure_url }), {
+      status: 200,
+    });
   } catch (err) {
     console.error("Upload error:", err);
-    return new Response(JSON.stringify({ error: "Upload failed" }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: "Upload failed", message: err?.message }),
+      { status: 500 }
+    );
   }
 }
-
